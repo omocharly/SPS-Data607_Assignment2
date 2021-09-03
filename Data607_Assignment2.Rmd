@@ -1,0 +1,66 @@
+
+### Title: CUNY SPS MDS Data607_Assignment2"
+### Author: Charles Ugiagbe
+### Date: "9/3/2021"
+
+
+
+### Introduction
+##### This assignment demonstrates ability to connect to a SQL database from R
+
+#### Load the required libraries
+
+
+```{r}
+library(RODBC)
+library(tidyverse)
+```
+
+### Connect to the MySQL database using odbc connect and a dsn
+```{r}
+conn <- odbcConnect("MySQL_dsn")
+```
+
+#### Read files
+Read the reviewers information from MySQL database into R 
+```{r}
+sqlQuery(conn, "Select * FROM Review limit 15")
+```
+
+Read the Dataframe into R
+```{r}
+query <- "Select * from Review"
+df <- sqlQuery(conn, query)
+```
+
+check the head to have an idea of the data
+```{r}
+head(df)
+```
+
+
+#### Structure
+##### Check the Structure of the data
+```{r}
+str(df)
+```
+
+Check the dataframe when review is "3"
+```{r}
+sqlQuery(conn, "Select * FROM Review where rating = 3")
+```
+
+#### Check if the dataframe contains any missing values
+```{r}
+anyNA.data.frame(df)
+```
+```{r}
+anyNA.data.frame(df$Rating)
+```
+
+
+
+
+
+
+
